@@ -3,7 +3,7 @@ import { TaskSidebar } from "./TaskSidebar";
 import { TaskMetricCard } from "./TaskMetricCard";
 import { TaskFilters } from "./TaskFilters";
 import { TaskTable } from "./TaskTable";
-import { TaskDetailModal } from "./TaskDetailModal";
+import { TaskDetailPanel } from "./TaskDetailPanel";
 import { Button } from "@/components/ui/button";
 import { 
   Clock, 
@@ -115,8 +115,8 @@ export function TaskDashboard() {
         </main>
       </div>
 
-      {/* Task Detail Modal */}
-      <TaskDetailModal 
+      {/* Task Detail Panel */}
+      <TaskDetailPanel 
         open={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
       />
