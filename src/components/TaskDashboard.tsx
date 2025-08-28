@@ -111,7 +111,7 @@ export function TaskDashboard() {
           <TaskFilters />
 
           {/* Task Table */}
-          <TaskTable />
+          <TaskTable onTaskClick={() => setIsModalOpen(true)} />
         </main>
       </div>
 

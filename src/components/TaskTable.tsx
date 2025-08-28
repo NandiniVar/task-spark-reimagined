@@ -2,6 +2,10 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 
+interface TaskTableProps {
+  onTaskClick?: (task: Task) => void;
+}
+
 interface Task {
   id: string;
   customerName: string;
@@ -111,7 +115,7 @@ function getPriorityBadge(priority: Task["priority"]) {
   );
 }
 
-export function TaskTable() {
+export function TaskTable({ onTaskClick }: TaskTableProps) {
   return (
     <div className="bg-card rounded-lg border border-border overflow-hidden">
       <div className="overflow-x-auto">
@@ -133,14 +137,18 @@ export function TaskTable() {
           </thead>
           <tbody>
             {mockTasks.map((task) => (
-              <tr key={task.id} className="data-table-row">
-                <td className="p-4">
+              <tr 
+                key={task.id} 
+                className="data-table-row cursor-pointer hover:bg-primary/5 hover:border-l-4 hover:border-l-primary transition-all duration-200"
+                onClick={() => onTaskClick?.(task)}
+              >
+                <td className="p-4" onClick={(e) => e.stopPropagation()}>
                   <Checkbox />
                 </td>
-                <td className="p-4 font-medium">{task.customerName}</td>
+                <td className="p-4 font-medium hover:text-primary transition-colors">{task.customerName}</td>
                 <td className="p-4 text-muted-foreground">{task.customerCode}</td>
-                <td className="p-4 text-primary font-medium">{task.taskId}</td>
-                <td className="p-4">{task.title}</td>
+                <td className="p-4 text-primary font-semibold hover:text-primary-light transition-colors">{task.taskId}</td>
+                <td className="p-4 font-medium">{task.title}</td>
                 <td className="p-4">{getStatusBadge(task.status)}</td>
                 <td className="p-4">{getPriorityBadge(task.priority)}</td>
                 <td className="p-4 text-muted-foreground">{task.owner}</td>
